@@ -1,0 +1,9 @@
+form {
+    text-align: center;
+}
+
+textarea {
+    width: 60%;
+    height: 200px;
+    border-radius: 5px;
+}
