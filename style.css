@@ -1,9 +1,61 @@
-form {
+body {
     text-align: center;
 }
 
 textarea {
-    width: 60%;
+    width: 800px;
     height: 200px;
     border-radius: 5px;
+}
+
+.keyboard-wrapper {
+    width: 800px;
+    margin: 0 auto;
+    border: solid black 1px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    background-color: #424242;
+}
+
+.row1, .row2, .row3, .row4, .row5 {
+    margin: 0 auto;
+}
+
+.key {
+    width: 40px;
+    min-height: 40px;
+    display: block;
+    line-height: 40px;
+    margin: 5px;
+    float: left;
+    border: 1px solid black;
+    background-color: #f2f4f8;
+    border-radius: 7px;
+    color: #424242;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-radius 0.5s ease-out;
+}
+
+.key:hover {
+    border-color: rgba(220, 233, 255, 0.48);
+}
+
+.double {
+    width: 92px;
+}
+
+.space {
+    width: 350px;
+}
+
+.animation {
+    border-radius: 100%;
+    background-color: #ffffff;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
