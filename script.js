@@ -121,7 +121,7 @@ function keydownHandler(e) {
     let symbol = document.getElementById(`${e.code}`);
 
     animation(e.code);
-    if (e.key == "Backspace" || e.key == "Control" || e.key == "Meta" || e.key == "Alt" || e.key == "Delete") {
+    if (e.key == "Control" || e.key == "Meta" || e.key == "Alt" || e.key == "Delete") {
         return textarea.value += "";
     } else if (e.key == "Enter") {
         return textarea.value += "\n";
@@ -133,6 +133,8 @@ function keydownHandler(e) {
         return changeLayoutShift();
     } else if (e.key == "CapsLock") {
         return pressCapsLock();
+    } else if (e.key == "Backspace") {
+        return  textarea.value = textarea.value.slice(0, -1);
     }
 
     textarea.value += symbol.textContent;
@@ -162,7 +164,7 @@ function mousedownHandler(e) {
     let textarea = document.getElementsByTagName("textarea")[0];
     let symbol = document.getElementById(`${e.target.id}`);
     animation(e.target.id);
-    if (e.target.id == "Backspace" || e.target.id == "CapsLock" || e.target.id == "ControlLeft" || e.target.id == "MetaLeft"
+    if (e.target.id == "CapsLock" || e.target.id == "ControlLeft" || e.target.id == "MetaLeft"
         || e.target.id == "AltLeft" || e.target.id == "Delete" || e.target.id == "ControlRight" || e.target.id == "AltRight") {
         return textarea.value += "";
     } else if (e.target.id == "Space") {
@@ -173,6 +175,8 @@ function mousedownHandler(e) {
         return textarea.value += "   ";
     } else if (e.target.id == "ShiftRight" || e.target.id == "ShiftLeft") {
         return changeLayoutShift();
+    } else if (e.target.id == "Backspace") {
+        return  textarea.value = textarea.value.slice(0, -1);
     }
 
     textarea.value += symbol.textContent;
