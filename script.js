@@ -58,8 +58,8 @@ window.onload = () => {
 
 function createTextarea() {
     let infomationBlock = document.createElement("div");
-    infomationBlock.innerHTML = "<p>Клавиатура создана в операционной системе Windows</p>";
-    infomationBlock.innerHTML += "<p>Для переключения языка комбинация: левыe ctrl + alt</p>";
+    infomationBlock.innerHTML = "<p>Клавиатура создана в операционной системе <b>Windows</b></p>";
+    infomationBlock.innerHTML += "<p>Для переключения языка комбинация: <b>левыe ctrl + alt</b></p>";
     let textarea = document.createElement("textarea");
 
     body.appendChild(infomationBlock);
@@ -121,20 +121,18 @@ function keydownHandler(e) {
     let symbol = document.getElementById(`${e.code}`);
 
     animation(e.code);
-    if (e.key == "Control" || e.key == "Meta" || e.key == "Alt") {
+    if (e.code == "CapsLock" || e.key == "Control" || e.key == "Meta" || e.key == "Alt") {
         return textarea.value += "";
     } else if (e.key == "Enter") {
         return textarea.value += "\n";
     } else if (e.key == "Tab") {
         return textarea.value += "   ";
-    } else if (e.key == "Space") {
+    } else if (e.code == "Space") {
         return textarea.value += " ";
-    } else if (e.key == "Shift") {
+    } else if (e.code == "ShiftLeft" || e.code == "ShiftRight") {
         return changeLayoutShift();
-    } else if (e.key == "CapsLock") {
-        return pressCapsLock();
     } else if (e.key == "Backspace" || e.key == "Delete") {
-        return  textarea.value = textarea.value.slice(0, -1);
+        return textarea.value = textarea.value.slice(0, -1);
     }
 
     textarea.value += symbol.textContent;
@@ -142,18 +140,25 @@ function keydownHandler(e) {
 
 function animation(btn) {
     let element = document.getElementById(`${btn}`);
-    element.classList.toggle("animation");
+    element.classList.add("animation");
+}
+
+function animationOut(btn) {
+    let element = document.getElementById(`${btn}`);
+    element.classList.remove("animation");
 }
 
 function keyupHandler(e) {
     e.preventDefault();
+    animationOut(e.code);
+
     if ((e.code === "ControlLeft" && e.altKey) || (e.ctrlKey && e.code === "AltLeft")) {
-        changeLayoutLanguage();
-    } else if (e.key == "Shift") {
-        animation(e.code);
+        return changeLayoutLanguage();
+    } else if (e.code == "ShiftLeft" || e.code == "ShiftRight") {
         return changeLayoutShift();
+    } else if (e.code == "CapsLock") {
+        return pressCapsLock();
     }
-    animation(e.code);
 }
 
 function mousedownHandler(e) {
@@ -176,7 +181,7 @@ function mousedownHandler(e) {
     } else if (e.target.id == "ShiftRight" || e.target.id == "ShiftLeft") {
         return changeLayoutShift();
     } else if (e.target.id == "Backspace" || e.target.id == "Delete") {
-        return  textarea.value = textarea.value.slice(0, -1);
+        return textarea.value = textarea.value.slice(0, -1);
     }
 
     textarea.value += symbol.textContent;
@@ -189,7 +194,7 @@ function mouseupHandler(e) {
         return pressCapsLock();
     }
 
-    animation(e.target.id);
+    animationOut(e.target.id);
 }
 
 function changeLayoutLanguage() {
